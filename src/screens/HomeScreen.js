@@ -7,17 +7,24 @@ import Utils from '../utils'
 import Loading from '../components/Loading'
 import { WIDTH } from '../constants/constants'
 
-const renderItem = (item) => (
-    <TouchableOpacity key={item.title} style={{marginTop: 28}} activeOpacity={0.7}>
+const renderItem = (item, navigation) => (
+    <TouchableOpacity key={item.title} style={{marginTop: 28}} activeOpacity={0.7} onPress={() => navigation.navigate('DetailPostScreen', {link: item.link})}>
         <Image source={{uri: item.imgUrl, cache:'default'}} width={WIDTH - 16 * 2} height={240} resizeMode='cover' borderRadius={8} />
         <Text style={{fontSize: 16, color: '#54595f', fontWeight: '600', marginVertical: 8}}>{item.title}</Text>
-        <Text style={{color: '#adadad'}}>{item.time == "" ? "---" : item.time}</Text>
+        {
+            item.time == null
+            ?
+            <Text style={{color: '#adadad'}}>{item.metaData == "" ? "---" : item.metaData}</Text>
+            :
+            <Text style={{color: '#adadad'}}>{item.time == "" ? "---" : item.time}</Text>
+        }
     </TouchableOpacity>
 )
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
     const [newPost, setNewPost] = useState(null);
     const [newPostReceived, setNewPostReceived] = useState(null)
+    const [loiChuaMoiNgay, setLoiChuaMoiNgay] = useState(null)
 
     useEffect(() => {
         axios.get(`${Utils.apiUrl}/post/newPost`)
@@ -41,6 +48,17 @@ export default function HomeScreen() {
                 alert("Không thể tải dữ liệu")
             })
     }, [])
+    useEffect(() => {
+        axios.get(`${Utils.apiUrl}/post/loiChuaMoiNgay`)
+            .then((res) => {
+                // console.log(res.data.data.data)
+                setLoiChuaMoiNgay(res.data.data.data)
+            })
+            .catch(e => {
+                console.log("Có lỗi khi get newPostReceived");
+                alert("Không thể tải dữ liệu")
+            })
+    }, [])
     return (
         <View style={styles.container}>
             <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
@@ -55,7 +73,7 @@ export default function HomeScreen() {
                         <Loading />
                         :
                         newPost.map((item) => (
-                            renderItem(item)
+                            renderItem(item, navigation)
                         ))
                     }
                     <View style={[styles.titleContainer, {marginTop: 40}]}>
@@ -67,7 +85,19 @@ export default function HomeScreen() {
                         <Loading />
                         :
                         newPostReceived.map((item) => (
-                            renderItem(item)
+                            renderItem(item, navigation)
+                        ))
+                    }
+                    <View style={[styles.titleContainer, {marginTop: 40}]}>
+                        <Text style={styles.titleText}>LỜI CHÚA MỖI NGÀY</Text>
+                    </View>
+                    {
+                        loiChuaMoiNgay == null
+                        ?
+                        <Loading />
+                        :
+                        loiChuaMoiNgay.map((item) => (
+                            renderItem(item, navigation)
                         ))
                     }
                 </View>
@@ -82,7 +112,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
     },
     newsArea: {
-        // marginBottom: 40
+        marginBottom: 20
     },
     titleContainer: {
         justifyContent: 'center',
