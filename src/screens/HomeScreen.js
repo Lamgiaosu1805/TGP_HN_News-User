@@ -25,7 +25,7 @@ export default function HomeScreen({navigation}) {
     const [newPost, setNewPost] = useState(null);
     const [newPostReceived, setNewPostReceived] = useState(null)
     const [loiChuaMoiNgay, setLoiChuaMoiNgay] = useState(null)
-
+    //Chưa lọc khi data thành công
     useEffect(() => {
         axios.get(`${Utils.apiUrl}/post/newPost`)
             .then((res) => {
