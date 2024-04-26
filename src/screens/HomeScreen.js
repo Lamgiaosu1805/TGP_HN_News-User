@@ -6,6 +6,9 @@ import axios from 'axios'
 import Utils from '../utils'
 import Loading from '../components/Loading'
 import { WIDTH } from '../constants/constants'
+import { storeNewPost } from '../redux/slice/newPostSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { storeNewPostReceived } from '../redux/slice/newPostReceivedSlice'
 
 const renderItem = (item, navigation) => (
     <TouchableOpacity key={item.title} style={{marginTop: 28}} activeOpacity={0.7} onPress={() => navigation.navigate('DetailPostScreen', {link: item.link})}>
@@ -22,15 +25,21 @@ const renderItem = (item, navigation) => (
 )
 
 export default function HomeScreen({navigation}) {
-    const [newPost, setNewPost] = useState(null);
-    const [newPostReceived, setNewPostReceived] = useState(null)
     const [loiChuaMoiNgay, setLoiChuaMoiNgay] = useState(null)
+    const dispatch = useDispatch()
+
     //Chưa lọc khi data thành công
     useEffect(() => {
         axios.get(`${Utils.apiUrl}/post/newPost`)
             .then((res) => {
-                // console.log(res.data.data.data)
-                setNewPost(res.data.data.data)
+                if(res.data.status == true) {
+                    const action = storeNewPost(res.data.data.data)
+                    dispatch(action);
+                }
+                else{
+                    const action = storeNewPost([])
+                    dispatch(action);
+                }
             })
             .catch(e => {
                 console.log("Có lỗi khi get newPost");
@@ -40,8 +49,14 @@ export default function HomeScreen({navigation}) {
     useEffect(() => {
         axios.get(`${Utils.apiUrl}/post/newPostReceived`)
             .then((res) => {
-                // console.log(res.data.data.data)
-                setNewPostReceived(res.data.data.data)
+                if(res.data.status == true) {
+                    const action = storeNewPostReceived(res.data.data.data)
+                    dispatch(action);
+                }
+                else{
+                    const action = storeNewPostReceived([])
+                    dispatch(action);
+                }
             })
             .catch(e => {
                 console.log("Có lỗi khi get newPostReceived");
@@ -59,6 +74,8 @@ export default function HomeScreen({navigation}) {
                 alert("Không thể tải dữ liệu")
             })
     }, [])
+    const newPost = useSelector(state => state.newPost)
+    const newPostReceived = useSelector(state => state.newPostReceived)
     return (
         <View style={styles.container}>
             <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
