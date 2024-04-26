@@ -1,9 +1,12 @@
-import { StyleSheet } from 'react-native'
-import React, { useRef } from 'react'
+import { Dimensions, Modal, StyleSheet, View } from 'react-native'
+import React, { useRef, useState } from 'react'
 import WebView from 'react-native-webview';
+import Loading from './Loading';
+import { WIDTH } from '../constants/constants';
 
 export default function WebViewComponent({link}) {
     const webViewRef = useRef(null);
+    const [loading, setLoading] = useState(true)
     const injectHideScript = (className1, className2) => {
         const script = `
         var elements = document.getElementsByClassName("${className1}");
@@ -18,17 +21,27 @@ export default function WebViewComponent({link}) {
         webViewRef.current.injectJavaScript(script);
     };
     return (
-        <WebView
-            style={styles.container}
-            ref={webViewRef}
-            onLoadProgress={() => injectHideScript('site-header', 'elementor-button-wrapper')}
-            source={{ uri: link }}
-            bounces={false}
-            allowsBackForwardNavigationGestures={true}
-            showsVerticalScrollIndicator={false}
-            showsHorizontalScrollIndicator={false}
-            allowsInlineMediaPlayback={true}
-        />
+        <View style = {{flex: 1}}>
+
+           {
+            loading &&
+            <View style={{justifyContent: 'center', alignItems: 'center', position: 'relative', backgroundColor: 'whtie', width: WIDTH, height: Dimensions.get('window').height, top: 0}}>
+                <Loading />
+            </View>
+           }
+            <WebView
+                style={styles.container}
+                ref={webViewRef}
+                onLoadProgress={() => injectHideScript('site-header', 'elementor-button-wrapper')}
+                onLoadEnd={() => setLoading(false)}
+                source={{ uri: link }}
+                bounces={false}
+                allowsBackForwardNavigationGestures={true}
+                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
+                allowsInlineMediaPlayback={true}
+            />
+        </View>
     );
 }
 

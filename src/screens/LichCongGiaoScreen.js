@@ -8,7 +8,7 @@ import Loading from '../components/Loading'
 
 const renderItem = (item, navigation) => (
     <TouchableOpacity key={item.title} activeOpacity={0.7} style={{marginVertical: 10, alignItems: 'center'}} onPress={() => {navigation.navigate('DetailPostScreen', {link: item.link})}}>
-        <Text style={{fontSize: 18}}>{item.title}</Text>
+        <Text style={{fontSize: 18, textDecorationLine: 'underline', textDecorationColor: 'grey'}}>{item.title}</Text>
     </TouchableOpacity>
 )
 
