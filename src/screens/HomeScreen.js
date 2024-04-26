@@ -9,6 +9,7 @@ import { WIDTH } from '../constants/constants'
 import { storeNewPost } from '../redux/slice/newPostSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { storeNewPostReceived } from '../redux/slice/newPostReceivedSlice'
+import { storeLoiChuaMoiNgay } from '../redux/slice/loiChuaMoiNgaySlice'
 
 const renderItem = (item, navigation) => (
     <TouchableOpacity key={item.title} style={{marginTop: 28}} activeOpacity={0.7} onPress={() => navigation.navigate('DetailPostScreen', {link: item.link})}>
@@ -25,7 +26,7 @@ const renderItem = (item, navigation) => (
 )
 
 export default function HomeScreen({navigation}) {
-    const [loiChuaMoiNgay, setLoiChuaMoiNgay] = useState(null)
+
     const dispatch = useDispatch()
 
     //Chưa lọc khi data thành công
@@ -66,8 +67,14 @@ export default function HomeScreen({navigation}) {
     useEffect(() => {
         axios.get(`${Utils.apiUrl}/post/loiChuaMoiNgay`)
             .then((res) => {
-                // console.log(res.data.data.data)
-                setLoiChuaMoiNgay(res.data.data.data)
+                if(res.data.status == true) {
+                    const action = storeLoiChuaMoiNgay(res.data.data.data)
+                    dispatch(action);
+                }
+                else{
+                    const action = storeLoiChuaMoiNgay([])
+                    dispatch(action);
+                }
             })
             .catch(e => {
                 console.log("Có lỗi khi get newPostReceived");
@@ -76,6 +83,7 @@ export default function HomeScreen({navigation}) {
     }, [])
     const newPost = useSelector(state => state.newPost)
     const newPostReceived = useSelector(state => state.newPostReceived)
+    const loiChuaMoiNgay = useSelector(state => state.loiChuaMoiNgay)
     return (
         <View style={styles.container}>
             <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
@@ -129,7 +137,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
     },
     newsArea: {
-        marginBottom: 20
+        marginBottom: 20,
+        marginTop: 30
     },
     titleContainer: {
         justifyContent: 'center',
