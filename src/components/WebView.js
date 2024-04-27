@@ -21,8 +21,7 @@ export default function WebViewComponent({link}) {
         webViewRef.current.injectJavaScript(script);
     };
     return (
-        <View style = {{flex: 1}}>
-
+        <View style = {{flex: 1, paddingTop: 28, backgroundColor: 'white'}}>
            {
             loading &&
             <View style={{justifyContent: 'center', alignItems: 'center', position: 'relative', backgroundColor: 'whtie', width: WIDTH, height: Dimensions.get('window').height, top: 0}}>
@@ -45,4 +44,8 @@ export default function WebViewComponent({link}) {
     );
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+
+    }
+})

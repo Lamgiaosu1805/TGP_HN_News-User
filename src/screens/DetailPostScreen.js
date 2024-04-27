@@ -6,9 +6,7 @@ export default function DetailPostScreen({route}) {
     const {link} = route.params
     return (
         <View style={{flex: 1, backgroundColor: 'white'}}>
-            <SafeAreaView style={{flex: 1}}>
-                <WebViewComponent link={link}/>
-            </SafeAreaView>
+            <WebViewComponent link={link}/>
         </View>
     );
 }
