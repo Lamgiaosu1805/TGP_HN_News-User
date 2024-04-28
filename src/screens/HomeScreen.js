@@ -1,15 +1,9 @@
 import { ActivityIndicator, Dimensions, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { Colors } from '../constants/colors'
 import Header from '../components/Header'
-import axios from 'axios'
-import Utils from '../utils'
 import Loading from '../components/Loading'
 import { WIDTH } from '../constants/constants'
-import { storeNewPost } from '../redux/slice/newPostSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { storeNewPostReceived } from '../redux/slice/newPostReceivedSlice'
-import { storeLoiChuaMoiNgay } from '../redux/slice/loiChuaMoiNgaySlice'
 
 const renderItem = (item, navigation) => (
     <TouchableOpacity key={item.title} style={{marginTop: 28}} activeOpacity={0.7} onPress={() => navigation.navigate('DetailPostScreen', {link: item.link})}>
@@ -26,61 +20,6 @@ const renderItem = (item, navigation) => (
 )
 
 export default function HomeScreen({navigation}) {
-
-    const dispatch = useDispatch()
-
-    //Chưa lọc khi data thành công
-    useEffect(() => {
-        axios.get(`${Utils.apiUrl}/post/newPost`)
-            .then((res) => {
-                if(res.data.status == true) {
-                    const action = storeNewPost(res.data.data.data)
-                    dispatch(action);
-                }
-                else{
-                    const action = storeNewPost([])
-                    dispatch(action);
-                }
-            })
-            .catch(e => {
-                console.log("Có lỗi khi get newPost");
-                alert("Không thể tải dữ liệu")
-            })
-    }, [])
-    useEffect(() => {
-        axios.get(`${Utils.apiUrl}/post/newPostReceived`)
-            .then((res) => {
-                if(res.data.status == true) {
-                    const action = storeNewPostReceived(res.data.data.data)
-                    dispatch(action);
-                }
-                else{
-                    const action = storeNewPostReceived([])
-                    dispatch(action);
-                }
-            })
-            .catch(e => {
-                console.log("Có lỗi khi get newPostReceived");
-                alert("Không thể tải dữ liệu")
-            })
-    }, [])
-    useEffect(() => {
-        axios.get(`${Utils.apiUrl}/post/loiChuaMoiNgay`)
-            .then((res) => {
-                if(res.data.status == true) {
-                    const action = storeLoiChuaMoiNgay(res.data.data.data)
-                    dispatch(action);
-                }
-                else{
-                    const action = storeLoiChuaMoiNgay([])
-                    dispatch(action);
-                }
-            })
-            .catch(e => {
-                console.log("Có lỗi khi get newPostReceived");
-                alert("Không thể tải dữ liệu")
-            })
-    }, [])
     const newPost = useSelector(state => state.newPost)
     const newPostReceived = useSelector(state => state.newPostReceived)
     const loiChuaMoiNgay = useSelector(state => state.loiChuaMoiNgay)
