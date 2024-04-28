@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "tgp_hn_news",
-    "slug": "tgp_hn_news",
+    "name": "Tin tức TGP Hà Nội",
+    "slug": "tin-tuc-tgp-ha-noi",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/white-tgphanoi.png",
@@ -15,16 +15,30 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.kylanx11.tintuctgphanoi"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.kylanx11.tintuctgphanoi"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "07e4a4ba-c754-43dc-8142-bf0ba3a50876"
+      }
+    },
+    "owner": "kylanx11",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/07e4a4ba-c754-43dc-8142-bf0ba3a50876"
     }
   }
 }
