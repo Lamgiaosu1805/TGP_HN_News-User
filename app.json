@@ -25,16 +25,6 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "07e4a4ba-c754-43dc-8142-bf0ba3a50876"
-      }
-    },
-    "owner": "kylanx11",
-    "updates": {
-      "url": "https://u.expo.dev/07e4a4ba-c754-43dc-8142-bf0ba3a50876"
-    },
-    "runtimeVersion": "1.0.0"
+    }
   }
 }
