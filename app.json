@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "tgp_hn_news",
+    "name": "Tin Tức TGP Hà Nội",
     "slug": "tgp_hn_news",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -25,6 +25,18 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ed89c4a3-ed21-419f-a192-17df1fe192af"
+      }
+    },
+    "owner": "kylanx11",
+    "runtimeVersion": {
+      "policy": "1.0.0"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/ed89c4a3-ed21-419f-a192-17df1fe192af"
     }
   }
 }
