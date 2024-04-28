@@ -6,6 +6,7 @@ import LichCongGiaoScreen from '../screens/LichCongGiaoScreen'
 import MenuScreen from '../screens/MenuScreen'
 import {FontAwesome5} from '@expo/vector-icons'
 import HocGiaoLyScreen from '../screens/HocGiaoLyScreen'
+import NotificationScreen from '../screens/NotificationScreen'
 
 const Tab = createBottomTabNavigator()
 
@@ -25,7 +26,7 @@ export default function HomeBottomTabNavigator() {
                     </View>
                 ),
             }}/>
-             <Tab.Screen name="HocGiaoLyScreen" component={HocGiaoLyScreen} options={{
+            <Tab.Screen name="HocGiaoLyScreen" component={HocGiaoLyScreen} options={{
                 tabBarIcon: ({focused}) => (
                     <View style={{justifyContent: 'center', alignItems: 'center', position: 'absolute', top: '30%'}}>
                         <FontAwesome5 name="book-open" size={20} color={focused ? 'red' : 'grey'}/>
@@ -33,11 +34,19 @@ export default function HomeBottomTabNavigator() {
                     </View>
                 ),
             }}/>
-             <Tab.Screen name="LichCongGiao" component={LichCongGiaoScreen} options={{
+            <Tab.Screen name="LichCongGiao" component={LichCongGiaoScreen} options={{
                 tabBarIcon: ({focused}) => (
                     <View style={{justifyContent: 'center', alignItems: 'center', position: 'absolute', top: '30%'}}>
                         <FontAwesome5 name="calendar" size={20} color={focused ? 'red' : 'grey'}/>
                         <Text style={{fontSize: 11, marginTop: 6, color: focused ? 'red' : 'grey'}}>Lịch Công giáo</Text>
+                    </View>
+                ),
+            }}/>
+            <Tab.Screen name="ThongBao" component={NotificationScreen} options={{
+                tabBarIcon: ({focused}) => (
+                    <View style={{justifyContent: 'center', alignItems: 'center', position: 'absolute', top: '30%'}}>
+                        <FontAwesome5 name="bell" size={20} color={focused ? 'red' : 'grey'}/>
+                        <Text style={{fontSize: 11, marginTop: 6, color: focused ? 'red' : 'grey'}}>Thông báo</Text>
                     </View>
                 ),
             }}/>
