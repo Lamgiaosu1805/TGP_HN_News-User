@@ -4,7 +4,7 @@
     "slug": "tin-tuc-tgp-ha-noi",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/white-tgphanoi.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
