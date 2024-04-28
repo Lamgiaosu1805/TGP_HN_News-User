@@ -1,4 +1,4 @@
-rootProject.name = 'tgp_hn_news'
+rootProject.name = 'Tin tức TGP Hà Nội'
 
 dependencyResolutionManagement {
   versionCatalogs {
