@@ -4,10 +4,10 @@
     "slug": "tgp_hn_news",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/tgphanoi.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/tgphanoi.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,7 +19,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/tgphanoi.png",
         "backgroundColor": "#ffffff"
       }
     },
@@ -33,7 +33,7 @@
     },
     "owner": "kylanx11",
     "runtimeVersion": {
-      "policy": "1.0.0"
+      "policy": "appVersion"
     },
     "updates": {
       "url": "https://u.expo.dev/ed89c4a3-ed21-419f-a192-17df1fe192af"
