@@ -21,8 +21,7 @@ export default function WebViewComponent({link}) {
         webViewRef.current.injectJavaScript(script);
     };
     return (
-        <View style = {{flex: 1}}>
-
+        <View style = {{flex: 1, marginTop: 32}}>
            {
             loading &&
             <View style={{justifyContent: 'center', alignItems: 'center', position: 'relative', backgroundColor: 'whtie', width: WIDTH, height: Dimensions.get('window').height, top: 0}}>

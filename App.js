@@ -7,6 +7,7 @@ import DetailPostScreen from './src/screens/DetailPostScreen';
 import { Provider } from 'react-redux';
 import store from './src/redux/store';
 import SplashScreen from './src/screens/SplashScreen';
+import LinhMucScreen from './src/screens/LinhMucScreen';
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
           <Stack.Screen name="HomeBottomTabNavigator" component={HomeBottomTabNavigator} />
           <Stack.Screen name="DetailPostScreen" component={DetailPostScreen} />
           <Stack.Screen name="SplashScreen" component={SplashScreen} />
+          <Stack.Screen name="LinhMucScreen" component={LinhMucScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

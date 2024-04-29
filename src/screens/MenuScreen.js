@@ -40,7 +40,7 @@ export default function MenuScreen({navigation}) {
             </View>
             <Text style={styles.textItem}>Danh mục tin tức</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.item} activeOpacity={0.6}>
+          <TouchableOpacity style={styles.item} activeOpacity={0.6} onPress={() => navigation.navigate('LinhMucScreen')}>
             <View style={{width: 26, height: 26, justifyContent: 'center', alignItems: 'center'}}>
               <FontAwesome5 name='users' size={20} />
             </View>
