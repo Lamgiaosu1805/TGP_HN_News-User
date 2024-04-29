@@ -1,12 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import Header from '../components/Header'
 
 export default function HocGiaoLyScreen() {
-  return (
-    <View>
-      <Text>HocGiaoLyScreen</Text>
-    </View>
-  )
+    return (
+      <View>
+        <Header />
+      </View>
+    )
 }
 
 const styles = StyleSheet.create({})
