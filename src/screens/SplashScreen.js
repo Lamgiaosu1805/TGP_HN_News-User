@@ -71,7 +71,7 @@ export default function SplashScreen({navigation}) {
             })
     }, [])
     useEffect(() => {
-        if(newPost != null && newPostReceived != null && loiChuaMoiNgay != null) {
+        if(newPost != null || newPostReceived != null || loiChuaMoiNgay != null) {
             navigation.replace('HomeBottomTabNavigator')
         }
     })

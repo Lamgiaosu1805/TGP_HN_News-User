@@ -1,4 +1,4 @@
-import { ActivityIndicator, FlatList, Image, StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import DetailHeader from '../components/DetailHeader'
 import axios from 'axios'
@@ -24,6 +24,9 @@ export default function LinhMucScreen({navigation}) {
     const [listLM, setListLM] = useState([])
     const [loading, setLoading] = useState(false)
     const [page, setPage] = useState(1)
+    const [searchString, setSearchString] = useState("")
+    const [searchStatus, setSearchStatus] = useState(false)
+    
     const getListLinhMucPerPage = async (page) => {
         setLoading(true)
         try {
@@ -43,14 +46,49 @@ export default function LinhMucScreen({navigation}) {
             setLoading(false)
         }
     }
+
+
+    const searchLm = utils.debounce((async (searchString) => {
+        setSearchStatus(true)
+        try {
+            if(searchString == "") {
+                // setPage(1);
+                // getListLinhMucPerPage
+            }
+            else {
+                const res = await axios.post(`${utils.apiUrl}/linhMucDoan/search`, {
+                    searchValue: searchString,
+                    type: 1
+                })
+                const resData = res.data;
+                setListLM(resData.data)
+            }
+            setSearchStatus(false)
+        } catch (error) {
+            console.log("có lỗi khi search LM")
+            alert("Lỗi hệ thống")
+            setSearchStatus(false)
+        }
+    }), 1000)
+
     useEffect(() => {
         getListLinhMucPerPage(page)
     }, [])
     return (
         <View style={styles.container}>
             <DetailHeader title={"Linh mục TGP Hà Nội"} leftIcon={{name: "chevron-left", callBack: () => {navigation.goBack()}}} />
+            <View style={{backgroundColor: 'white', marginVertical: 12, marginHorizontal: 16, borderRadius: 8, paddingLeft: 12}}>
+                <TextInput 
+                    style={{fontSize: 16, height: 40}}
+                    enterKeyHint='search'
+                    onChangeText={(value) => {
+                        searchLm(value)
+                        setSearchString(value)
+                    }}
+                />
+            </View>
             {
-                listLM.length == 0 && loading == true 
+                (listLM.length == 0 && loading == true) || (searchStatus == true)
                 ?
                 <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                     <Loading />
@@ -65,11 +103,13 @@ export default function LinhMucScreen({navigation}) {
                         keyExtractor={(item, index) => index.toString()}
                         showsVerticalScrollIndicator={false}
                         onEndReached={() => {
-                            getListLinhMucPerPage(page)
+                            if(searchString == "") {
+                                getListLinhMucPerPage(page)
+                            }
                         }}
                     />
                     {
-                        loading == true && page > 1 && <ActivityIndicator style={{marginBottom: 20}}/>
+                        (loading == true && page > 1 && searchString == "") && <ActivityIndicator style={{marginBottom: 20}}/>
                     }
                 </View>
             }
