@@ -26,54 +26,30 @@ export default function LinhMucScreen({navigation}) {
     const [page, setPage] = useState(1)
     const [searchString, setSearchString] = useState("")
     const [searchStatus, setSearchStatus] = useState(false)
-    
-    const getListLinhMucPerPage = async (page) => {
+
+    const getListLm = async (loadMore, page) => {
         setLoading(true)
-        try {
-            const res = await axios.get(`${utils.apiUrl}/linhMucDoan/${page}`)
-            if(res.data.status == true) {
-                if(res.data.data.data.length != 0) {
-                    setListLM([...listLM, ...res.data.data.data])
-                    setPage(page + 1)
-                }
-            } else {
-                alert("Lỗi hệ thống")
+        const res = await axios.post(`${utils.apiUrl}/linhMucDoan/search`, {
+            searchValue: searchString,
+            page: page
+        })
+        const resData = res.data
+        if(resData.status == true) {
+            if(loadMore == true) {
+                setListLM([...listLM, ...resData.data.data]);
+                setPage(page + 1)
             }
-            setLoading(false)
-        } catch (error) {
-            console.log(error)
-            alert("Lỗi hệ thống")
-            setLoading(false)
+            else{
+                setListLM(resData.data.data)
+                setPage(2)
+            }
         }
+        setLoading(false)
     }
-
-
-    const searchLm = utils.debounce((async (searchString) => {
-        setSearchStatus(true)
-        try {
-            if(searchString == "") {
-                // setPage(1);
-                // getListLinhMucPerPage
-            }
-            else {
-                const res = await axios.post(`${utils.apiUrl}/linhMucDoan/search`, {
-                    searchValue: searchString,
-                    type: 1
-                })
-                const resData = res.data;
-                setListLM(resData.data)
-            }
-            setSearchStatus(false)
-        } catch (error) {
-            console.log("có lỗi khi search LM")
-            alert("Lỗi hệ thống")
-            setSearchStatus(false)
-        }
-    }), 1000)
-
     useEffect(() => {
-        getListLinhMucPerPage(page)
+        getListLm(false, 1)
     }, [])
+    
     return (
         <View style={styles.container}>
             <DetailHeader title={"Linh mục TGP Hà Nội"} leftIcon={{name: "chevron-left", callBack: () => {navigation.goBack()}}} />
@@ -82,13 +58,18 @@ export default function LinhMucScreen({navigation}) {
                     style={{fontSize: 16, height: 40}}
                     enterKeyHint='search'
                     onChangeText={(value) => {
-                        searchLm(value)
                         setSearchString(value)
+                        if(value == "") {
+                            getListLm(false, 1);
+                        }
+                    }}
+                    onSubmitEditing={() => {
+                        getListLm(false, 1);
                     }}
                 />
             </View>
             {
-                (listLM.length == 0 && loading == true) || (searchStatus == true)
+                (listLM.length == 0 && searchStatus == true)
                 ?
                 <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                     <Loading />
@@ -103,13 +84,13 @@ export default function LinhMucScreen({navigation}) {
                         keyExtractor={(item, index) => index.toString()}
                         showsVerticalScrollIndicator={false}
                         onEndReached={() => {
-                            if(searchString == "") {
-                                getListLinhMucPerPage(page)
+                            if(loading == false) {
+                                getListLm(true, page)
                             }
                         }}
                     />
                     {
-                        (loading == true && page > 1 && searchString == "") && <ActivityIndicator style={{marginBottom: 20}}/>
+                        (loading == true) && <ActivityIndicator style={{marginBottom: 20}}/>
                     }
                 </View>
             }
