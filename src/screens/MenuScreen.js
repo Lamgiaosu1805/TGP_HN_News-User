@@ -30,7 +30,7 @@ export default function MenuScreen({navigation}) {
         <View style={styles.content}>
           <TouchableOpacity style={styles.item} activeOpacity={0.6} onPress={() => navigation.navigate('DetailPostScreen', {link: 'https://www.tonggiaophanhanoi.org/luoc-su-tong-giao-phan-ha-noi/'})}>
             <View style={{width: 26, height: 26, justifyContent: 'center', alignItems: 'center'}}>
-              <Image source={{uri: 'https://tonggiaophanhanoi.org/wp-content/uploads/2020/03/ttgm_ha_noi_logo.png'}} width={26} height={26} resizeMode='contain'/>
+              <Image source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Coat_of_arms_of_Joseph_V%C5%A9_V%C4%83n_Thi%C3%AAn.svg/200px-Coat_of_arms_of_Joseph_V%C5%A9_V%C4%83n_Thi%C3%AAn.svg.png'}} width={26} height={26} resizeMode='contain'/>
             </View>
             <Text style={styles.textItem}>Giới thiệu về TGP Hà Nội</Text>
           </TouchableOpacity>
