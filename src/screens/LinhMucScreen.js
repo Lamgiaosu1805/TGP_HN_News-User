@@ -17,23 +17,35 @@ export default function LinhMucScreen({navigation}) {
     const [item, setItem] = useState(null)
 
     const getListLm = async (loadMore, page) => {
-        setLoading(true)
-        const res = await axios.post(`${utils.apiUrl}/linhMucDoan/search`, {
-            searchValue: searchString,
-            page: page
-        })
-        const resData = res.data
-        if(resData.status == true) {
-            if(loadMore == true) {
-                setListLM([...listLM, ...resData.data.data]);
-                setPage(page + 1)
-            }
-            else{
-                setListLM(resData.data.data)
-                setPage(2)
-            }
+        if(page == 1) {
+            setSearchStatus(true)
         }
-        setLoading(false)
+        setLoading(true)
+        try {
+            const res = await axios.post(`${utils.apiUrl}/linhMucDoan/search`, {
+                searchValue: searchString,
+                page: page
+            })
+            const resData = res.data
+            if(resData.status == true) {
+                if(loadMore == true) {
+                    setListLM([...listLM, ...resData.data.data]);
+                    setPage(page + 1)
+                }
+                else{
+                    setListLM(resData.data.data)
+                    setPage(2)
+                }
+            }
+            setLoading(false)
+            setSearchStatus(false)
+        } catch (error) {
+            setLoading(false)
+            setSearchStatus(false)
+            console.log("có lỗi khi get lm", error)
+            alert("Lỗi hệ thống")
+        }
+        
     }
     useEffect(() => {
         getListLm(false, 1)
@@ -109,7 +121,7 @@ export default function LinhMucScreen({navigation}) {
                 />
             </View>
             {
-                (listLM.length == 0 && searchStatus == true)
+                listLM.length == 0 || searchStatus == true
                 ?
                 <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                     <Loading />
