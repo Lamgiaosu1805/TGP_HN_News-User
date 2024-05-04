@@ -23,7 +23,8 @@
         "foregroundImage": "./assets/tgphanoi.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.kylanx11.tgp_hn_news"
+      "package": "com.kylanx11.tgp_hn_news",
+      "googleServicesFile": "./android/app/google-services.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"
