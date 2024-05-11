@@ -17,7 +17,7 @@ import { useEffect, useRef, useState } from 'react';
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
-    shouldPlaySound: false,
+    shouldPlaySound: true,
     shouldSetBadge: false,
   }),
 });
