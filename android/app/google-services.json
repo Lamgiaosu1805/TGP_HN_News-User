@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1041354512001",
+    "project_id": "tgphn-news",
+    "storage_bucket": "tgphn-news.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041354512001:android:a74d23d5e731f52db41f80",
+        "android_client_info": {
+          "package_name": "com.kylanx11.tgp_hn_news"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQn8Vly8JQviJxhtfuhSeAOSCTI1vB_Pw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
