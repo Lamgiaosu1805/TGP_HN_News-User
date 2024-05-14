@@ -12,6 +12,7 @@ import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
 import { useEffect, useRef, useState } from 'react';
+import GiaoXuScreen from './src/screens/GiaoXuScreen';
 
 
 Notifications.setNotificationHandler({
@@ -130,6 +131,7 @@ export default function App() {
           <Stack.Screen name="DetailPostScreen" component={DetailPostScreen} />
           <Stack.Screen name="SplashScreen" component={SplashScreen} />
           <Stack.Screen name="LinhMucScreen" component={LinhMucScreen} />
+          <Stack.Screen name="GiaoXuScreen" component={GiaoXuScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

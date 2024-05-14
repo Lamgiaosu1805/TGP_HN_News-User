@@ -46,7 +46,7 @@ export default function MenuScreen({navigation}) {
             </View>
             <Text style={styles.textItem}>Linh mục đoàn</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.item, {borderBottomWidth: 0}]} activeOpacity={0.6}>
+          <TouchableOpacity style={[styles.item, {borderBottomWidth: 0}]} activeOpacity={0.6} onPress={() => navigation.navigate('GiaoXuScreen')}>
             <View style={{width: 26, height: 26, justifyContent: 'center', alignItems: 'center'}}>
               <FontAwesome5 name='church' size={20} />
             </View>
