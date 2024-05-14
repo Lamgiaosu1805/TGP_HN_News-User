@@ -14,7 +14,7 @@ PODS:
     - ExpoModulesCore
   - EXNotifications (0.27.7):
     - ExpoModulesCore
-  - Expo (50.0.17):
+  - Expo (50.0.18):
     - ExpoModulesCore
   - ExpoDevice (5.9.4):
     - ExpoModulesCore
@@ -1335,7 +1335,7 @@ SPEC CHECKSUMS:
   EXJSONUtils: 5c42959e87be238b045ef37cc5268b16a6c0ad4a
   EXManifests: 5e8c29f36c716af768a4ea47ec05e1b89ab93091
   EXNotifications: 1c117bf042bd05a5b1a1ffd06f4c36ff9921ed2b
-  Expo: 2cdb5916749a1509cf88114f1f510bd458630eb4
+  Expo: 09bd48f31bb7f1a3c97fd5a6cb28feae89cb4e40
   ExpoDevice: 97307196d8cab694e245752b8a7afacc35c14e03
   ExpoFileSystem: 74cc0fae916f9f044248433971dcfc8c3befd057
   ExpoKeepAwake: 0f5cad99603a3268e50af9a6eb8b76d0d9ac956c
