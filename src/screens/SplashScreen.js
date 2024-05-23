@@ -13,26 +13,26 @@ export default function SplashScreen({navigation}) {
     const newPost = useSelector(state => state.newPost)
     const newPostReceived = useSelector(state => state.newPostReceived)
     const loiChuaMoiNgay = useSelector(state => state.loiChuaMoiNgay)
-    useEffect(() => {
+    const getNewPost = () => {
         axios.get(`${utils.apiUrl}/post/newPost`)
-            .then((res) => {
-                if(res.data.status == true) {
-                    const action = storeNewPost(res.data.data.data)
-                    dispatch(action);
-                }
-                else{
-                    const action = storeNewPost([])
-                    dispatch(action);
-                }
-            })
-            .catch(e => {
-                console.log("Có lỗi khi get newPost", e);
-                alert("Không thể tải dữ liệu")
+        .then((res) => {
+            if(res.data.status == true) {
+                const action = storeNewPost(res.data.data.data)
+                dispatch(action);
+            }
+            else{
                 const action = storeNewPost([])
                 dispatch(action);
-            })
-    }, [])
-    useEffect(() => {
+            }
+        })
+        .catch(e => {
+            console.log("Có lỗi khi get newPost", e);
+            alert("Không thể tải dữ liệu")
+            const action = storeNewPost([])
+            dispatch(action);
+        })
+    }
+    const getNewPostReceived = () => {
         axios.get(`${utils.apiUrl}/post/newPostReceived`)
             .then((res) => {
                 if(res.data.status == true) {
@@ -50,25 +50,34 @@ export default function SplashScreen({navigation}) {
                 const action = storeNewPost([])
                 dispatch(action);
             })
-    }, [])
-    useEffect(() => {
+    }
+    const getLoiChuaMoiNgay = () => {
         axios.get(`${utils.apiUrl}/post/loiChuaMoiNgay`)
-            .then((res) => {
-                if(res.data.status == true) {
-                    const action = storeLoiChuaMoiNgay(res.data.data.data)
-                    dispatch(action);
-                }
-                else{
-                    const action = storeLoiChuaMoiNgay([])
-                    dispatch(action);
-                }
-            })
-            .catch(e => {
-                console.log("Có lỗi khi get newPostReceived", e);
-                alert("Không thể tải dữ liệu")
+        .then((res) => {
+            if(res.data.status == true) {
+                const action = storeLoiChuaMoiNgay(res.data.data.data)
+                dispatch(action);
+            }
+            else{
                 const action = storeLoiChuaMoiNgay([])
                 dispatch(action);
-            })
+            }
+        })
+        .catch(e => {
+            console.log("Có lỗi khi get newPostReceived", e);
+            alert("Không thể tải dữ liệu")
+            const action = storeLoiChuaMoiNgay([])
+            dispatch(action);
+        })
+    }
+    useEffect(() => {
+        getNewPost()
+    }, [])
+    useEffect(() => {
+        getNewPostReceived()
+    }, [])
+    useEffect(() => {
+        getLoiChuaMoiNgay()
     }, [])
     useEffect(() => {
         if(newPost != null && newPostReceived != null && loiChuaMoiNgay != null) {

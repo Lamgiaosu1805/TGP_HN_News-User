@@ -1,9 +1,15 @@
-import { ActivityIndicator, Dimensions, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Dimensions, Image, RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import Loading from '../components/Loading'
 import { WIDTH } from '../constants/constants'
 import { useDispatch, useSelector } from 'react-redux'
+import SplashScreen from './SplashScreen'
+import utils from '../utils'
+import axios from 'axios'
+import { storeNewPost } from '../redux/slice/newPostSlice'
+import { storeNewPostReceived } from '../redux/slice/newPostReceivedSlice'
+import { storeLoiChuaMoiNgay } from '../redux/slice/loiChuaMoiNgaySlice'
 
 const renderItem = (item, navigation) => (
     <TouchableOpacity key={item.title} style={{marginTop: 28}} activeOpacity={0.7} onPress={() => navigation.navigate('DetailPostScreen', {link: item.link})}>
@@ -20,12 +26,81 @@ const renderItem = (item, navigation) => (
 )
 
 export default function HomeScreen({navigation}) {
+    const dispatch = useDispatch();
     const newPost = useSelector(state => state.newPost)
     const newPostReceived = useSelector(state => state.newPostReceived)
     const loiChuaMoiNgay = useSelector(state => state.loiChuaMoiNgay)
+    const getNewPost = () => {
+        axios.get(`${utils.apiUrl}/post/newPost`)
+        .then((res) => {
+            if(res.data.status == true) {
+                const action = storeNewPost(res.data.data.data)
+                dispatch(action);
+            }
+            else{
+                const action = storeNewPost([])
+                dispatch(action);
+            }
+        })
+        .catch(e => {
+            console.log("Có lỗi khi get newPost", e);
+            alert("Không thể tải dữ liệu")
+            const action = storeNewPost([])
+            dispatch(action);
+        })
+    }
+    const getNewPostReceived = () => {
+        axios.get(`${utils.apiUrl}/post/newPostReceived`)
+            .then((res) => {
+                if(res.data.status == true) {
+                    const action = storeNewPostReceived(res.data.data.data)
+                    dispatch(action);
+                }
+                else{
+                    const action = storeNewPostReceived([])
+                    dispatch(action);
+                }
+            })
+            .catch(e => {
+                console.log("Có lỗi khi get newPostReceived", e);
+                alert("Không thể tải dữ liệu")
+                const action = storeNewPost([])
+                dispatch(action);
+            })
+    }
+    const getLoiChuaMoiNgay = () => {
+        axios.get(`${utils.apiUrl}/post/loiChuaMoiNgay`)
+        .then((res) => {
+            if(res.data.status == true) {
+                const action = storeLoiChuaMoiNgay(res.data.data.data)
+                dispatch(action);
+            }
+            else{
+                const action = storeLoiChuaMoiNgay([])
+                dispatch(action);
+            }
+        })
+        .catch(e => {
+            console.log("Có lỗi khi get newPostReceived", e);
+            alert("Không thể tải dữ liệu")
+            const action = storeLoiChuaMoiNgay([])
+            dispatch(action);
+        })
+    }
+    const getData = () => {
+        getNewPost()
+        getLoiChuaMoiNgay()
+        getNewPostReceived()
+    }
     return (
         <View style={styles.container}>
-            <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
+            <ScrollView
+                style={{flex: 1}}
+                showsVerticalScrollIndicator={false}
+                refreshControl={
+                    <RefreshControl onRefresh={getData}/>
+                }
+            >
                 <Header />
                 <View style={styles.newsArea}>
                     <View style={styles.titleContainer}>
