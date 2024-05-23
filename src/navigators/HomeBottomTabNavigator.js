@@ -22,7 +22,7 @@ export default function HomeBottomTabNavigator() {
                 tabBarIcon: ({focused}) => (
                     <View style={{justifyContent: 'center', alignItems: 'center', position: 'absolute', top: '30%'}}>
                         <FontAwesome5 name="home" size={20} color={focused ? 'red' : 'grey'}/>
-                        <Text style={{fontSize: 11, marginTop: 6, color: focused ? 'red' : 'grey'}}>Trang chủ</Text>
+                        <Text style={{fontSize: 9, marginTop: 6, color: focused ? 'red' : 'grey'}}>Trang chủ</Text>
                     </View>
                 ),
             }}/>
@@ -30,7 +30,7 @@ export default function HomeBottomTabNavigator() {
                 tabBarIcon: ({focused}) => (
                     <View style={{justifyContent: 'center', alignItems: 'center', position: 'absolute', top: '30%'}}>
                         <FontAwesome5 name="book-open" size={20} color={focused ? 'red' : 'grey'}/>
-                        <Text style={{fontSize: 11, marginTop: 6, color: focused ? 'red' : 'grey'}}>Học Giáo lý</Text>
+                        <Text style={{fontSize: 9, marginTop: 6, color: focused ? 'red' : 'grey'}}>Học Giáo lý</Text>
                     </View>
                 ),
             }}/>
@@ -38,7 +38,7 @@ export default function HomeBottomTabNavigator() {
                 tabBarIcon: ({focused}) => (
                     <View style={{justifyContent: 'center', alignItems: 'center', position: 'absolute', top: '30%'}}>
                         <FontAwesome5 name="calendar" size={20} color={focused ? 'red' : 'grey'}/>
-                        <Text style={{fontSize: 11, marginTop: 6, color: focused ? 'red' : 'grey'}}>Lịch Công giáo</Text>
+                        <Text style={{fontSize: 9, marginTop: 6, color: focused ? 'red' : 'grey'}}>Lịch Công giáo</Text>
                     </View>
                 ),
             }}/>
@@ -46,7 +46,7 @@ export default function HomeBottomTabNavigator() {
                 tabBarIcon: ({focused}) => (
                     <View style={{justifyContent: 'center', alignItems: 'center', position: 'absolute', top: '30%'}}>
                         <FontAwesome5 name="bell" size={20} color={focused ? 'red' : 'grey'}/>
-                        <Text style={{fontSize: 11, marginTop: 6, color: focused ? 'red' : 'grey'}}>Thông báo</Text>
+                        <Text style={{fontSize: 9, marginTop: 6, color: focused ? 'red' : 'grey'}}>Thông báo</Text>
                     </View>
                 ),
             }}/>
@@ -54,7 +54,7 @@ export default function HomeBottomTabNavigator() {
                 tabBarIcon: ({focused}) => (
                     <View style={{justifyContent: 'center', alignItems: 'center', position: 'absolute', top: '30%'}}>
                         <FontAwesome5 name="bars" size={20} color={focused ? 'red' : 'grey'}/>
-                        <Text style={{fontSize: 11, marginTop: 6, color: focused ? 'red' : 'grey'}}>Menu</Text>
+                        <Text style={{fontSize: 9, marginTop: 6, color: focused ? 'red' : 'grey'}}>Menu</Text>
                     </View>
                 ),
             }}/>

@@ -27,6 +27,7 @@ const renderItem = (item, navigation) => (
 
 export default function HomeScreen({navigation}) {
     const dispatch = useDispatch();
+    const [refreshing, setRefreshing] = useState(false);
     const newPost = useSelector(state => state.newPost)
     const newPostReceived = useSelector(state => state.newPostReceived)
     const loiChuaMoiNgay = useSelector(state => state.loiChuaMoiNgay)
@@ -88,9 +89,11 @@ export default function HomeScreen({navigation}) {
         })
     }
     const getData = () => {
+        setRefreshing(true)
         getNewPost()
         getLoiChuaMoiNgay()
         getNewPostReceived()
+        setRefreshing(false)
     }
     return (
         <View style={styles.container}>
@@ -98,7 +101,7 @@ export default function HomeScreen({navigation}) {
                 style={{flex: 1}}
                 showsVerticalScrollIndicator={false}
                 refreshControl={
-                    <RefreshControl onRefresh={getData}/>
+                    <RefreshControl onRefresh={getData} refreshing={refreshing}/>
                 }
             >
                 <Header />
