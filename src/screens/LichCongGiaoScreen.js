@@ -42,7 +42,7 @@ export default function LichCongGiaoScreen({navigation}) {
                     :
                     <View style={{flex: 1, paddingHorizontal: 16}}>
                         <ScrollView style={{paddingVertical: 16}} showsVerticalScrollIndicator={false}>
-                            <Text style={{textAlign: 'center', fontWeight: '700', fontSize: 18, marginBottom: 20}}>LỊCH CÔNG GIÁO 2024</Text>
+                            <Text style={{textAlign: 'center', fontWeight: '700', fontSize: 18, marginBottom: 20}}>LỊCH CÔNG GIÁO 2025</Text>
                             <View style={{marginBottom: 20}}>
                                 {
                                     lich.map((item) => (
